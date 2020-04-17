@@ -9,6 +9,8 @@ function shuffleArray(array) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     }
+
+    return array
 }
 
 class MainContainer extends Component {
@@ -24,7 +26,7 @@ class MainContainer extends Component {
     handleImgClick = () => {
 
         // test shuffle by calling here..... not working
-        this.shuffleImages();
+        this.randomize();
 
         // Determine clicked condition
         if ( this.state.clicked === false) {
@@ -87,6 +89,7 @@ class MainContainer extends Component {
                         <ImgCard
                             image={images.image}
                             name={images.description}
+                            handleImgClick={this.handleImgClick}
                         />
                     ))}
                 </div>
