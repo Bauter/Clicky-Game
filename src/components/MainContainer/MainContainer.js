@@ -3,6 +3,14 @@ import ImgCard from "../imgCard/imgCard"
 import images from "../../images.json"
 import "./style.css";
 
+// Fisher-Yates (aka Knuth) Shuffle
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
 class MainContainer extends Component {
 
     state = {
@@ -15,6 +23,9 @@ class MainContainer extends Component {
 
     handleImgClick = () => {
 
+        // test shuffle by calling here..... not working
+        this.shuffleImages();
+
         // Determine clicked condition
         if ( this.state.clicked === false) {
 
@@ -25,21 +36,31 @@ class MainContainer extends Component {
             // Display "Correct Guess" message
             this.setState({ message: "Correct Guess! 1pt! " })
 
-            // Randomize... HOW????
+            // Call randomize... 
+            this.randomize();
+            
 
         } else if ( this.state.clicked === true) {
 
             // Reset counter score to zero
-            this.setState({ counter: 0});
+            this.setState({ counter: 0 });
 
             // Display "Wrong guess!" message
             this.setState({ message: "Guessed that one already... play again?" })
+
+            // Call randomize... 
+            this.randomize();
 
             // Reset all "clicked" props to false
 
         }
 
     };
+
+    // Function to call shuffle 
+    randomize = () => {
+        this.setState({ images: shuffleArray(images) });
+    }
 
 
     render() {
