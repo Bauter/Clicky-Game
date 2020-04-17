@@ -1,0 +1,12 @@
+.container {    
+    width: 70%;
+    margin: auto;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 5px 8px 0 darkred;
+}
