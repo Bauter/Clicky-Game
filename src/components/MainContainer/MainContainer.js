@@ -1,11 +1,19 @@
+//==================================================
+// Import needed files
+//==================================================
+
 import React, { Component } from "react";
-import ImgCard from "../imgCard/imgCard"
-import NavBar from "../navBar/NavBar"
-import images from "../../images.json"
+import ImgCard from "../imgCard/imgCard";
+import NavBar from "../navBar/NavBar";
+import Jumbotron from "../Jumbotron/Jumbotron";
+import Footer from "../Footer/Footer";
+import images from "../../images.json";
 import "./style.css";
 
-
+//=========================================
 // Fisher-Yates (aka Knuth) Shuffle
+//=========================================
+
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -15,8 +23,15 @@ function shuffleArray(array) {
     return array
 }
 
+//===========================================
+// Create extended component "MainContainer"
+//===========================================
 
 class MainContainer extends Component {
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //  Define State
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     state = {
         images,
@@ -27,7 +42,10 @@ class MainContainer extends Component {
         
     }
 
-    // onClick event listener
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // onClick event listener "handleImgClick"
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     handleImgClick = (id) => {
         // Push the id of the image into the clicked array
         let clickedImages = this.state.clicked;
@@ -115,14 +133,18 @@ class MainContainer extends Component {
 
     };
         
-    
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //  Define function to call shuffle 
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     randomize = () => {
         this.setState({ images: shuffleArray(images) });
     };
 
-
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Render to the page
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     render() {
         return (
             <div>
@@ -131,12 +153,7 @@ class MainContainer extends Component {
                     score={this.state.counter}
                     top={this.state.topScore}
                 />
-                <div className="jumbotron">
-
-                    <h1 className="text-center mb-4">Mini-fig Clicky Game!</h1>
-                    <h4 className="text-center">Lets Play, click the images, but not the same one twice!</h4>
-                
-                </div>
+                <Jumbotron />
 
                 <div className="container">
 
@@ -153,23 +170,7 @@ class MainContainer extends Component {
     
                 </div>
 
-                <div className="foot card-header mt-4 rounded gradient-border row">
-
-                    <div className="col-4 text-left">
-                        <a href="https://github.com/Bauter" target="_blank" className="footer-link">Bauter</a>
-                    </div>
-
-                    <div className="col-4">
-                        <h5 className="text-center p-5 " id="footer-title">
-                        Copyright &copy; 2020
-                        </h5>
-                    </div>
-      
-                    <div className="col-4 text-right">
-                        <a href="https://bauter.github.io/Updated-portfolio/" target="_blank" className="footer-link">Portfolio</a>
-                    </div>
-
-                </div>
+                <Footer />
 
             </div>
         )

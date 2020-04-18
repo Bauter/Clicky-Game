@@ -1,0 +1,13 @@
+h1 {
+    font-family: 'Bangers', cursive;
+}
+
+h4 {
+    color: red;
+    font-family: 'Neucha', cursive;
+}
+
+.jumbotron {
+    background-color: yellow;
+    border-bottom: 5px solid red;
+}

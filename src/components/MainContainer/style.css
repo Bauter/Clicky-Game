@@ -11,31 +11,7 @@
     box-shadow: 0 5px 8px 0 darkred;
 }
 
-.jumbotron {
-    background-color: yellow;
-    border-bottom: 5px solid red;
-}
-
-h4 {
-    color: red;
-    font-family: 'Neucha', cursive;
-}
-
-.score {
-    color: green;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 20px;
-}
-
 .card-columns {
     background-color: yellow;
 }
 
-h1 {
-    font-family: 'Bangers', cursive;
-}
-
-.foot {
-    background-color: rgb(228, 228, 11);
-    border-top: 5px solid red;
-}
