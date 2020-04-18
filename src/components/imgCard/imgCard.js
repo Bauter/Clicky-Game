@@ -9,7 +9,8 @@ const ImgCard = function(props) {
                     className="img"
                     alt={props.name}
                     src={props.image}
-                    onClick={props.handleImgClick}
+                    // pass the id through the click to push into array
+                    onClick={() => {props.handleImgClick(props.id)}}
                 />
             </div>
         </div>

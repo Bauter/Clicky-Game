@@ -3,67 +3,116 @@ import ImgCard from "../imgCard/imgCard"
 import images from "../../images.json"
 import "./style.css";
 
+
 // Fisher-Yates (aka Knuth) Shuffle
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     }
-
+    // Return the shuffled array
     return array
 }
+
 
 class MainContainer extends Component {
 
     state = {
         images,
-        clicked: false,
+        clicked: [],
         counter: 0,
         message: "Lets Play, click the images, but not the same one twice!"
         
     }
 
-    handleImgClick = () => {
+    // onClick event listener
+    handleImgClick = (id) => {
+        // Push the id of the image into the clicked array
+        let clickedImages = this.state.clicked;
 
-        // test shuffle by calling here..... not working
-        this.randomize();
+        //clickedImages.push(id)
 
-        // Determine clicked condition
-        if ( this.state.clicked === false) {
+        // test shuffle by calling here..... WORKS!
+        //this.randomize();
 
-            // Increment counter by one, set clicked prop to true,
-            this.setState({ counter: this.state.counter + 1, clicked: true});
-            //this.setState({ clicked: true })  ~~~ Maybe cleaner ^^^
+        
 
-            // Display "Correct Guess" message
-            this.setState({ message: "Correct Guess! 1pt! " })
 
-            // Call randomize... 
-            this.randomize();
+        for (let i=0; i <= this.state.clicked.length; i++) {
+
+            // Determine clicked condition
+            if ( this.state.clicked[] !== id) {
+
+                // Add 'this' id to the clicked array
+                clickedImages.push(id);
+
+                // View the array after push
+                console.log(`Array:${clickedImages}`);
+
+                // log the id to compare to logged array ^^^
+                console.log(`This id: ${id}`);
+
+                // And adjust state of clicked
+                this.setState({ clicked: clickedImages });
+                
+                // Increment counter by one, set clicked prop to true,
+                this.setState({ counter: this.state.counter + 1 });
+                //this.setState({ clicked: true })  
+
+                // Display "Correct Guess" message
+                this.setState({ message: "Correct Guess! 1pt! " })
+
+                // // Cleaner version of ^^^
+                // this.setState(
+                //     { 
+                //     clicked: clickedImages,
+                //     counter: this.state.counter + 1 ,
+                //     message: "Correct Guess! 1pt! "
+                //     }
+                // );
+
+                // Call randomize... 
+                this.randomize();
             
 
-        } else if ( this.state.clicked === true) {
+            } else {
 
-            // Reset counter score to zero
-            this.setState({ counter: 0 });
+                // Remove all id's from clicked array
+                clickedImages = [];
+                // And set state of clicked again back to empty array
+                this.setState({ clicked: clickedImages });
 
-            // Display "Wrong guess!" message
-            this.setState({ message: "Guessed that one already... play again?" })
+                // Reset counter score to zero
+                this.setState({ counter: 0 });
 
-            // Call randomize... 
-            this.randomize();
+                // Display "Wrong guess!" message
+                this.setState({ message: "Guessed that one already... play again?" });
 
-            // Reset all "clicked" props to false
+                // // Cleaner version of ^^^
+                // this.setState(
+                //     {
+                //         clicked: clickedImages,
+                //         counter: 0,
+                //         message: "Guessed that one already... play again?" 
+                //     }
+                // );
 
-        }
+                // Call randomize... 
+                this.randomize();
 
+                
+
+            };
+
+
+        };
+        
     };
 
     // Function to call shuffle 
     randomize = () => {
         this.setState({ images: shuffleArray(images) });
     }
-
 
     render() {
         return (
@@ -89,6 +138,7 @@ class MainContainer extends Component {
                         <ImgCard
                             image={images.image}
                             name={images.description}
+                            id={images.id}
                             handleImgClick={this.handleImgClick}
                         />
                     ))}
