@@ -1,0 +1,23 @@
+.messageDisplay {
+    color: red;
+    font-family: 'Neucha', cursive;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.scoreDisplay {
+    color: green;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.gameTitle {
+    color: red;
+    font-family: 'Bangers', cursive;
+}
+
+.navbar {
+    background-color: rgb(228, 228, 11) !important;
+}
+
