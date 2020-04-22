@@ -18,7 +18,7 @@ Mini-fig Clicky-Game, the purpose of this project was to create a simple react g
 2. Node.js to run node commands in terminal ("https://nodejs.org/en/download/").
 3. '.gitignore' file to write what files you would not like to upload. 
 4. NPM packages: 'babel' & 'gh-pages'.
-5. react (npm create-react-app your-app-name-here).
+5. react (npm create-react-app *your-app-name-here*).
 
 ## Lets get set up!
 
@@ -336,6 +336,7 @@ export default MainContainer;
 
 - NOTE:
     - Take notice in "MainContainer.js" how all the other components are imported into this file, and rendered to the page inside MainContainer's render method.
+    - Make an add. note about the *Fisher-Yates (aka Knuth) Shuffle* algorithm. This is used to shuffle the array of objects (*images* defined in "state").
     - Inside the react file "App.js", import the "MainContainer.js" file and call it inside App's render method like so:
 
 ```
@@ -390,15 +391,15 @@ export default App;
 
 - NOTE
     - The "id" property will be used to reference the image clicked.
-    - The "image" property will be the image URL that will be assigned to the ImgCard, <img> tag "src" attribute.
+    - The "image" property will be the image URL that will be assigned to the ImgCard, *img* tag "src" attribute.
     - The "credit" property is merely to list the image source.
-    - The "description" property will be the description assigned to the ImgCard, <img> tag "alt" attribute.
+    - The "description" property will be the description assigned to the ImgCard, *img* tag "alt" attribute.
 
 ##### ImgCard continued...
 
-- The ImgCard is simply a Bootstrap "card" with a "img-container" containing an <img> tag.
+- The ImgCard is simply a Bootstrap "card" with a "img-container" containing an *img* tag.
 
-- The <img> tag contains:
+- The *img* tag contains:
     - class attribute for bootstrap styling.
     - alt attribute to set the img description.
     - src attribute to set the image URL.
