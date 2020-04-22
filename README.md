@@ -17,7 +17,7 @@ Mini-fig Clicky-Game, the purpose of this project was to create a simple react g
 1. A code editor, I prefer Visual Studio Code ("https://code.visualstudio.com/").
 2. Node.js to run node commands in terminal ("https://nodejs.org/en/download/").
 3. '.gitignore' file to write what files you would not like to upload. 
-4. NPM packages: 'react-dom', 'babel', 'gh-pages'.
+4. NPM packages: 'babel' & 'gh-pages'.
 5. react (npm create-react-app your-app-name-here).
 
 ## Lets get set up!
@@ -54,19 +54,24 @@ Mini-fig Clicky-Game, the purpose of this project was to create a simple react g
 8. Inside your app's public folder, navigate to the "index.html" file, and in the head tags add bootstraps cdn link.
     - `<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css"/>`
 
+9. To ensure the ES6 syntax won't be a problem in other browsers, run `npm i babel` in the root of the app directory.
+
 
 ## Time to start creating our components
-1. Naviagte to the apps "src" folder, and create a directory called "components". All our components will be defined in here.
+
+- Naviagte to the apps "src" folder, and create a directory called "components". All our components will be defined in here.
 
 ### What should each component look like?
 
 NOTE:
-- Make sure to import the appropriate files and react components in each component file.
+- Make sure to import the appropriate files and react components in each component file. I try to make this clear in my code comments by dividing and labeling the sections of each file.
 - For each component, make a directory inside the "components" directory named for the specific component, then add a JS file for that component and a CSS file as well to control the styling for that specific component.
 
 - EX. "NavBar.js" and "style.css"
 
-#### Navbar
+#### NavBar
+
+- NavBar is used to create a sticky nav to display the game title, a message about the latest guess, and the user's current score and top score. In case it isn't obvious, it's not really a nav bar, but more of a score board that will scroll with the user as they play the game.
 
 - NavBar should look like this:
 
@@ -106,6 +111,8 @@ export default NavBar;
 ```
 
 #### Jumbotron
+
+- Jumbotron is used to provide header tags to display the game title and a brief description.
 
 - Jumbotron should look like this:
 
@@ -326,6 +333,172 @@ class MainContainer extends Component {
 export default MainContainer;
 
 ```
+
+- NOTE:
+    - Take notice in "MainContainer.js" how all the other components are imported into this file, and rendered to the page inside MainContainer's render method.
+    - Inside the react file "App.js", import the "MainContainer.js" file and call it inside App's render method like so:
+
+```
+//==================================================
+// Import needed files
+//==================================================
+
+import React from 'react';
+import MainContainer from "./components/MainContainer/MainContainer"
+import "./App.css"
+
+//==================================================
+// Define App()
+//==================================================
+
+function App() {
+  return (
+    <MainContainer />
+  );
+}
+
+export default App;
+```
+
+#### ImgCard
+
+- ImgCard will be the component that holds each image from the "images.json" file. Lets go over that quickly before moving on.
+
+##### Create a JSON file
+
+- Create a JSON  file to hold the URLS of images to use in the game. Feel free to be creative, try to create a theme for the game.
+
+- Inside the JSON file, create an array of objects that slooks like so:
+
+```
+[
+    {
+        "id": 1,
+        "image": "https://images.unsplash.com/photo-1484126673156-67e14f1a5478?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
+        "credit": "Photo by Austris Augusts on Unsplash",
+        "description": "Lego Arctic explorer"
+    },
+    {
+        "id": 2,
+        "image": "https://images.unsplash.com/photo-1503739171234-327ce271626f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1052&q=80",
+        "credit": "Photo by Praveesh Palakeel on Unsplash",
+        "description": "Lego Police on ATV"
+    }
+]
+
+```
+
+- NOTE
+    - The "id" property will be used to reference the image clicked.
+    - The "image" property will be the image URL that will be assigned to the ImgCard, <img> tag "src" attribute.
+    - The "credit" property is merely to list the image source.
+    - The "description" property will be the description assigned to the ImgCard, <img> tag "alt" attribute.
+
+##### ImgCard continued...
+
+- The ImgCard is simply a Bootstrap "card" with a "img-container" containing an <img> tag.
+
+- The <img> tag contains:
+    - class attribute for bootstrap styling.
+    - alt attribute to set the img description.
+    - src attribute to set the image URL.
+    - onClick function to create an event listener for the image.
+
+- Use "props" to reference the "MainContainer" component.
+
+- ImgCard should look something like this:
+
+```
+//==================================================
+// Import needed files
+//==================================================
+
+import React from "react";
+import "./style.css";
+
+//==================================================
+// Define component "ImgCard"
+//==================================================
+
+const ImgCard = function(props) {
+    return (
+        
+        <div className="card-group" key={props.id}>
+            <div className="img-container">
+                <img
+                    className="img"
+                    // Description if imag fails to load.
+                    alt={props.name}
+                    // Assign img url to img tag 'src' attribute.
+                    src={props.image}
+                    // pass the id through the click to push into array
+                    onClick={() => {props.handleImgClick(props.id)}}
+                />
+            </div>
+        </div>
+        
+    );
+}
+
+export default ImgCard
+
+```
+
+#### Footer
+
+- The Footer component is simply that, a footer. I like to use this it provide links to both my person portfolio and github profile.
+
+- Footer should look like this:
+
+```
+//==================================================
+// Import needed files
+//==================================================
+
+import React from "react";
+import "./style.css";
+
+//==================================================
+// Define component "Footer"
+//==================================================
+
+function Footer() {
+    return (
+        <div className="foot card-header mt-4 rounded gradient-border row">
+
+            <div className="col-4 text-left">
+                <a href="https://github.com/Bauter" target="_blank" rel="noopener noreferrer" className="btn btn-dark footer-link">Bauter</a>
+            </div>
+
+            <div className="col-4">
+                <h5 className="text-center p-5 " id="footer-title">
+                    Copyright &copy; 2020
+                </h5>
+            </div>
+      
+            <div className="col-4 text-right">
+                <a href="https://bauter.github.io/Updated-portfolio/" target="_blank" rel="noopener noreferrer" className="btn btn-dark footer-link">Portfolio</a>
+            </div>
+
+        </div>
+    );
+}
+
+export default Footer
+
+```
+
+## Guidelines for Collaboration ##
+
+-As I am still new to coding, and my initial projects will be used to create a portfolio to show to potential employers, i ask that no modifications are made at this time.
+
+#### However ####
+
+-Any input to improve my coding would be GREATLY appreciated. I am not opposed to the files being pulled for the sake of modifying and using as an example to teach/explain alt. methods, better practice, etc. Again I would ask they not be pushed to the repo to modify the initial document, but instead be sent to me an some alt. way.
+
+--Thank you for taking the time to look over this 'README' file--
+
+
 
 
 
